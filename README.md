@@ -7,4 +7,12 @@ Our project will be to create a virtual advisor that will assist students with t
 ## Utilities
 - C++
 - SQL (MariaDB)
-- 
+- KDE Plasma 5 (GUI)
+
+## Specifications
+- general majors, no concentrations, Catalogs 2020-2023
+  - CS
+  - Business
+  - Psych
+  - Mechanical Engineering
+
