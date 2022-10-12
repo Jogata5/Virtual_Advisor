@@ -11,7 +11,7 @@ Julian Ogata - jogata@csu.fullerton.edu <br />
 ## Utilities
 - C++
 - SQL (MariaDB)
-- KDE Plasma 5 (GUI)
+- QT (GUI)
 
 ## Specifications
 - general majors, no concentrations, Catalogs 2020-2023
