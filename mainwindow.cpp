@@ -7,15 +7,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    ui->comboBoxMajors->addItem("");
     ui->comboBoxMajors->addItem("Computer Science");
     ui->comboBoxMajors->addItem("Psychology");
 
-    ui->comboBoxCatalog->addItem("2019");
-    ui->comboBoxCatalog->addItem("2020");
-
-
-
-
+    ui->comboBoxCatalog->hide();
 //    this -> setCentralWidget(ui->menuFile);
 
 
@@ -39,11 +35,13 @@ void MainWindow::on_comboBoxMajors_activated(int index)
 {
     switch(index){
     case 0:
+        if(ui->comboBoxCatalog->isVisible()) {
+            ui->comboBoxCatalog->hide();
+        }
         break;
     default:
-        ui->comboBoxCatalog->show();
+        if(!ui->comboBoxCatalog->isVisible()){
+            ui->comboBoxCatalog->show();
+        }
     }
-
-
 }
-

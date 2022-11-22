@@ -17,7 +17,7 @@
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>30</x>
       <y>30</y>
       <width>711</width>
       <height>501</height>
@@ -31,12 +31,15 @@
       <rect>
        <x>20</x>
        <y>40</y>
-       <width>86</width>
+       <width>151</width>
        <height>25</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">selection-background-color: rgb(192, 191, 188);</string>
+     </property>
+     <property name="currentText">
+      <string/>
      </property>
      <property name="placeholderText">
       <string>Majors</string>
@@ -58,7 +61,7 @@
     <widget class="QComboBox" name="comboBoxCatalog">
      <property name="geometry">
       <rect>
-       <x>130</x>
+       <x>190</x>
        <y>40</y>
        <width>121</width>
        <height>25</height>
