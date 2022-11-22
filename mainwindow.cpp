@@ -65,19 +65,26 @@ void MainWindow::on_submitButton_clicked()
 
     // Checks if name & cwid not blank
     if(name.trimmed().isEmpty() || cwid.trimmed().isEmpty() || major == "" || catalog_year == ""){
+        ui->errorLabel->setText("Please complete all boxes");
         error->show();
     }
 
+    else if(cwid.length() != 9){
+        ui->errorLabel->setText("CWID length incorrect");
+        error->show();
+    }
     // Checks if groups are visible, hides/shows respectively
     else if(login->isVisible()){
         login->hide();
         if(!results->isVisible()){
+            ui->resultsNameLabel->setText("Hello " + name + "!");
+            ui->resultsCWIDLabel->setText("CWID: " + cwid);
             results->show();
         }
     }
 }
 
-
+// Controls login error msessage
 void MainWindow::on_errorSubmit_clicked()
 {
     QWidget *error = ui->errorGroupBox;
