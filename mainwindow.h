@@ -35,6 +35,8 @@ private slots:
 
     void on_errorSubmit_clicked();
 
+    void on_submitCoursesButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     QString major = "";

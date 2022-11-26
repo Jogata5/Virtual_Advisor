@@ -104,7 +104,6 @@ void MainWindow::on_submitButton_clicked()
         }
     }
 
-    qDebug() << major_code;
     // Checks if name & cwid not blank
     if(name.trimmed().isEmpty() || cwid.trimmed().isEmpty() || major == "" || catalog_year == ""){
         ui->errorLabel->setText("Please complete all boxes");
@@ -125,13 +124,12 @@ void MainWindow::on_submitButton_clicked()
             ui->resultsYearLabel->setText(catalog_year);
 
             QSqlQuery query;
-            query.exec("SELECT * FROM Course");
+            query.exec("SELECT * FROM Course WHERE Major='CPSC'");
 
             QVBoxLayout* scrollLayout = new QVBoxLayout(this);
 
             while(query.next()) {
-                qDebug() << query.value(1).toString();
-                QCheckBox *checkbox = new QCheckBox(query.value(0).toString() + " - " + query.value(2).toString(), this);
+                QCheckBox *checkbox = new QCheckBox(query.value(5).toString() + "-" + query.value(0).toString() + " - " + query.value(2).toString(), this);
                 scrollLayout->addWidget(checkbox);
             }
             ui->scrollAreaWidgetContents->setLayout(scrollLayout);
@@ -151,3 +149,77 @@ void MainWindow::on_errorSubmit_clicked()
 }
 
 
+void MainWindow::on_submitCoursesButton_clicked()
+{
+    QSqlQuery query_find_course;
+        QString dept_name = "'CPSC'";
+        QString course_num = "'131'";
+
+        QString squery_find = "SELECT * FROM Course WHERE DName = " + dept_name + " && CNum = " + course_num;
+
+        qDebug() << squery_find;
+
+        query_find_course.prepare(squery_find);
+
+        query_find_course.first();
+        query_find_course.exec();
+        while(query_find_course.next()){
+            qDebug() << query_find_course.value(0).toString();
+            qDebug() << query_find_course.value(1).toString();
+                    qDebug() << query_find_course.value(2).toString();
+                    qDebug() << query_find_course.value(3).toString();
+                    qDebug() << query_find_course.value(4).toString();
+
+        }
+
+    QSqlQuery query_where;
+        query_where.prepare("CC_ID != ? ,");
+
+
+
+    QSqlQuery query_CC;
+        query_CC.prepare("SELECT * FROM Course_Core WHERE CC_ID = ?");
+
+
+    QString query_DName;
+    QString query_CNum;
+    QString DName;
+    QString CName;
+    QString CNum;
+    QString course;
+
+    int counter = 0;
+
+    QWidget *scrollLayout = ui->scrollAreaWidgetContents;
+
+    QList<QCheckBox *> allBoxes = scrollLayout->findChildren<QCheckBox *>();
+
+    for(QCheckBox *checkbox : allBoxes) {
+        if(checkbox->isChecked()) {
+            for(auto it : checkbox->text()) {
+                if(counter < 4) {
+                    DName.append(it);
+                }
+                else if(counter > 4 && counter < 8) {
+                    CName.append(it);
+                }
+                else { CNum.append(it);
+            }
+        }
+        query_find_course.bindValue(":dept_name", DName);
+        query_find_course.bindValue(":course_num", CNum);
+        query_find_course.exec();
+        qDebug() << query_find_course.value(0).toString();
+        qDebug() << query_find_course.value(1).toString();
+        qDebug() << query_find_course.value(2).toString();
+        qDebug() << query_find_course.value(3).toString();
+        qDebug() << query_find_course.value(4).toString();
+
+        DName = "";
+        CName = "";
+        CNum = "";
+//        qDebug() << DName << CName << CNum;
+        counter = 0;
+    }
+}
+}
