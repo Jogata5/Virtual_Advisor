@@ -1,5 +1,20 @@
+#include <QMainWindow>
+
+#include <QSqlTableModel>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QMessageBox>
+#include <QDebug>
+#include <QCheckBox>
+#include <QVBoxLayout>
+
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
+
+
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -7,14 +22,31 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    mDatabase = QSqlDatabase::addDatabase("QMYSQL");
+       mDatabase.setHostName("localhost");
+       mDatabase.setPort(3306);
+       mDatabase.setDatabaseName("VirtualAdvisor");
+       mDatabase.setUserName("jogata");
+       mDatabase.setPassword("password");
+       if (!mDatabase.open()){
+           QMessageBox::critical(this, "Error", mDatabase.lastError().text());
+           return;
+        }
+
+    QSqlQuery query;
+
     ui->comboBoxMajors->addItem("");
     ui->comboBoxMajors->addItem("Computer Science");
-    ui->comboBoxMajors->addItem("Psychology");
+//    ui->comboBoxMajors->addItem("Psychology");
 
 
     ui->comboBoxCatalog->addItem("");
-    ui->comboBoxCatalog->addItem("2019");
-    ui->comboBoxCatalog->addItem("2020");
+
+    query.exec("SELECT * FROM Catalog_years;");
+    while (query.next()) {
+        ui->comboBoxCatalog->addItem(query.value(0).toString());
+        qDebug() << query.value(0).toString();
+    }
 
     ui->comboBoxCatalog->hide();
 
@@ -22,13 +54,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->errorGroupBox->hide();
 
+    major_pairs.append(qMakePair("Computer Science", "CPSC"));
+
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
 
 // Controls dropdown list show/hide
 void MainWindow::on_comboBoxMajors_activated(int index)
@@ -44,6 +78,7 @@ void MainWindow::on_comboBoxMajors_activated(int index)
     default:
         if(!ui->comboBoxCatalog->isVisible()){
             ui->comboBoxCatalog->show();
+
         }
     }
 }
@@ -63,6 +98,13 @@ void MainWindow::on_submitButton_clicked()
     major = ui->comboBoxMajors->currentText();
     catalog_year = ui->comboBoxCatalog->currentText();
 
+    for(auto it : major_pairs) {
+        if(it.first == major) {
+            major_code = it.second;
+        }
+    }
+
+    qDebug() << major_code;
     // Checks if name & cwid not blank
     if(name.trimmed().isEmpty() || cwid.trimmed().isEmpty() || major == "" || catalog_year == ""){
         ui->errorLabel->setText("Please complete all boxes");
@@ -79,6 +121,20 @@ void MainWindow::on_submitButton_clicked()
         if(!results->isVisible()){
             ui->resultsNameLabel->setText("Hello " + name + "!");
             ui->resultsCWIDLabel->setText("CWID: " + cwid);
+            ui->resultsMajorLabel->setText(major);
+            ui->resultsYearLabel->setText(catalog_year);
+
+            QSqlQuery query;
+            query.exec("SELECT * FROM Course");
+
+            QVBoxLayout* scrollLayout = new QVBoxLayout(this);
+
+            while(query.next()) {
+                qDebug() << query.value(1).toString();
+                QCheckBox *checkbox = new QCheckBox(query.value(0).toString() + " - " + query.value(2).toString(), this);
+                scrollLayout->addWidget(checkbox);
+            }
+            ui->scrollAreaWidgetContents->setLayout(scrollLayout);
             results->show();
         }
     }
@@ -93,4 +149,5 @@ void MainWindow::on_errorSubmit_clicked()
         error->hide();
     }
 }
+
 
