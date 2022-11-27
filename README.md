@@ -14,9 +14,9 @@ Julian Ogata - jogata@csu.fullerton.edu <br />
 - QT (GUI)
 
 ## Specifications
-- general majors, no concentrations, Catalogs 2020-2023
+- general majors, no concentrations, Catalogs 2019-2020
   - CS
   - Business
   - Psych
-  - Mechanical Engineering
+
 
