@@ -1,0 +1,14 @@
+CREATE TABLE Course(
+	CNum VARCHAR(5),
+	CC_ID VARCHAR(10),
+	CName VARCHAR(200),
+	units INT,
+	CatYear VARCHAR(4),
+	DName VARCHAR(10),
+	Major VARCHAR(5),
+	FOREIGN KEY(DName) REFERENCES Department(DName),
+	FOREIGN KEY(CC_ID) REFERENCES Course_Core(CC_ID),
+	FOREIGN KEY(CatYear) REFERENCES Catalog_years(CatYear),
+	FOREIGN KEY(Major) REFERENCES Major(Major),
+	PRIMARY KEY(CNum, DName, CC_ID, Major, CatYear)
+);

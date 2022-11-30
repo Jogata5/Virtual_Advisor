@@ -1,0 +1,2 @@
+INSERT INTO Catalog_years VALUES('2019');
+INSERT INTO Catalog_years VALUES('2020');
