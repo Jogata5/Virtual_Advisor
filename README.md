@@ -16,7 +16,6 @@ Julian Ogata - jogata@csu.fullerton.edu <br />
 ## Specifications
 - general majors, no concentrations, Catalogs 2019-2020
   - CS
-  - Business
   - Psych
 
 
