@@ -10,7 +10,9 @@
 #include <QComboBox>
 #include <QPushButton>
 #include <QPair>
+#include <QStackedWidget>
 #include <QVector>
+#include <QHash>
 
 
 QT_BEGIN_NAMESPACE
@@ -37,16 +39,21 @@ private slots:
 
     void on_submitCoursesButton_clicked();
 
+    void on_comboBoxSection_currentTextChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     QString major = "";
     QString catalog_year = "";
-    QString cwid;
-    QString name;
-    QString major_code;
+    QString cwid = "";
+    QString name = "";
+    QString major_code = "";
     QVector<QPair<QString, QString>> major_pairs;
-    QSqlTableModel *mModel;
+    QVector<QString> sections;
     QSqlDatabase mDatabase;
+    QHash<QString, QVector<int>> core_sections;
+    QHash<QString, int> stack_widget_sections;
+    QString not_in = "";
 };
 
 #endif // MAINWINDOW_H
