@@ -1,0 +1,8 @@
+CREATE TABLE Advisors(
+	Name VARCHAR(50),
+	Email VARCHAR(50),
+	Phone VARCHAR(15),
+	DName VARCHAR(5),
+	FOREIGN KEY(DName) REFERENCES Department(DName),
+	PRIMARY KEY(Email, DName)
+);

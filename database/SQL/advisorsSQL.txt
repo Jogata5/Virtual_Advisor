@@ -1,0 +1,2 @@
+INSERT INTO Advisors VALUES('HSS Student Success Center', 'psycadvisement@fullerton.edu ', '657-278-3514', 'PSYC');
+INSERT INTO Advisors VALUES('Elizabeth Gomez', 'elgomez@fullerton.edu', '657-278-3212', 'CPSC');

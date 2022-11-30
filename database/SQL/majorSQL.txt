@@ -1,0 +1,4 @@
+INSERT INTO Major VALUES('CPSC', 'Computer Science', '2019');
+INSERT INTO Major VALUES('CPSC', 'Computer Science', '2020');
+INSERT INTO Major VALUES('PSYC', 'Psychology', '2019');
+INSERT INTO Major VALUES('PSYC', 'Psychology', '2020');

@@ -1,0 +1,4 @@
+CREATE TABLE Catalog_years(
+	CatYear VARCHAR(4),
+	PRIMARY KEY(CatYear)
+);

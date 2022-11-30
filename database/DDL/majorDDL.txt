@@ -1,0 +1,7 @@
+CREATE TABLE Major(
+	Major VARCHAR(5),
+	Major_name VARCHAR(50),
+	CatYear VARCHAR(4),
+	FOREIGN KEY(CatYear) REFERENCES Catalog_years(CatYear),
+	PRIMARY KEY(Major, CatYear)
+);

@@ -1,0 +1,5 @@
+CREATE TABLE Department(
+    	DName VARCHAR(10),
+    	name VARCHAR(50),
+    	PRIMARY KEY(DName)
+);
