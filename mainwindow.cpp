@@ -334,10 +334,10 @@ void MainWindow::on_submitCoursesButton_clicked()
 
     if (!_not_in.isEmpty()) {
         _not_in.back() = ' ';
-        squery = "SELECT * FROM Course WHERE Major='"+get_major_code()+"' && CC_ID NOT IN ("+_not_in+");";
+        squery = "SELECT * FROM Course WHERE Major='"+get_major_code()+"' && CatYear='"+get_catalog_year()+"' && CC_ID NOT IN ("+_not_in+");";
     }
     else {
-        squery = "SELECT * FROM Course WHERE Major='"+get_major_code()+"';";
+        squery = "SELECT * FROM Course WHERE Major='"+get_major_code()+"' && CatYear='"+get_catalog_year()+"';";
 
     }
     query.exec(squery);
