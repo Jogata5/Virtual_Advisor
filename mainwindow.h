@@ -1,18 +1,22 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+// MainWindow
 #include <QMainWindow>
+
+// SQL
 #include <QSqlDatabase>
 #include <QSqlTableModel>
 #include <QSqlError>
 
-#include <QMessageBox>
+// Widgets and Objects
 #include <QComboBox>
-#include <QPushButton>
+#include <QHash>
+#include <QMessageBox>
 #include <QPair>
+#include <QPushButton>
 #include <QStackedWidget>
 #include <QVector>
-#include <QHash>
 
 #include "advisors_info.h"
 
@@ -28,8 +32,10 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    // Prototype  method for connecting to local database
     void connect_database(QString database_type, QString host, QString name, QString user, QString password, int port);
 
+    // Prototypes for Setters
     void set_catalog_year(QString cat_year);
     void set_cwid(QString cwid);
     void set_major(QString major);
@@ -37,26 +43,17 @@ public:
     void set_name(QString name);
     void set_not_in(QString not_in);
 
-//    QHash<QString, QVector<int>> get_core_sections();
-//    QHash<QString,int> get_stack_widget_sections();
-
+    // Prototypes for Getters
     QSqlDatabase get_database();
-
     QString get_catalog_year();
     QString get_cwid();
     QString get_major();
     QString get_major_code();
     QString get_name();
 
-
-
-//    QVector<QPair<QString, QString>> get_major_pairs();
-//    QVector<QString> get_sections();
-
-
+    // slots/methods that are connected to each interactable UI object
 private slots:
     void on_comboBoxMajors_activated(int index);
-
 
     void on_submitButton_clicked();
 

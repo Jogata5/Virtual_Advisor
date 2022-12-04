@@ -17,6 +17,7 @@ Advisors_info::~Advisors_info()
     delete advisor_ui;
 }
 
+/// Setters
 void Advisors_info::set_department(QString Dname) {
     _department = Dname;
 }
@@ -30,17 +31,21 @@ void Advisors_info::set_phone(QString phone) {
     _phone = phone;
 }
 
+// Getters
 QString Advisors_info::get_department() { return _department;}
 QString Advisors_info::get_email() {return _email;}
 QString Advisors_info::get_name() {return _name;}
 QString Advisors_info::get_phone() {return _phone;}
 
+// Shows Advisor Window
 void Advisors_info::show_advisor(QString major_code) {
+
+    // Initialize SQl Query and execute
     QSqlQuery query;
     QString squery = "SELECT * FROM Advisors WHERE DName='"+major_code+"';";
-
     query.exec(squery);
 
+    // Checks if the query is active and iterates through the results
     if (query.isActive()) {
         while (query.next()) {
             set_department(query.value(3).toString());
@@ -49,6 +54,8 @@ void Advisors_info::show_advisor(QString major_code) {
             set_phone(query.value(2).toString());
         }
     }
+
+    // Sets the window text boxes to the fetched SQL data.
     advisor_ui->label->setText(get_name());
     advisor_ui->label_2->setText(get_department());
     advisor_ui->label_3->setText(get_email());
